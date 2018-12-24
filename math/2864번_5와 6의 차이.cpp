@@ -1,5 +1,6 @@
 /*
-백준 2864 5와 6의 차이 (https://www.acmicpc.net/problem/2864)
+BOJ 2864 5와 6의 차이 (https://www.acmicpc.net/problem/2864)
+.
 */
 #include <cstdio>
 using namespace std;
