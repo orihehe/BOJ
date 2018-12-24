@@ -1,5 +1,5 @@
 /*
-백준 2231 분해합 (https://www.acmicpc.net/problem/2231)
+BOJ 2231 분해합 (https://www.acmicpc.net/problem/2231)
 
 */
 #include <cstdio>
