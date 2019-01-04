@@ -1,9 +1,9 @@
 /*
-¹éÁØ 11375 ¿­Ç÷°­È£ (https://www.acmicpc.net/problem/11375)
-Ã³À½ Â¥º¸´Â ÃÖ´ë À¯·® ±¸ÇÏ´Â ¾Ë°í¸®ÁòÀÌ´Ù
-ÀÌºÐÅ½»öÀ¸·Îµµ Çª´Â ¹®Á¦¶ó°í ÇÏ´Âµ¥ ³ªÁß¿¡ ±×°É·Îµµ ´Ù½Ã Ç®¾î¾ß°Ú´Ù.
-Ã³À½¿¡ bfs·Î Ç®¾ú´Âµ¥ °è¼Ó TLE¸¦ ¹Þ¾Ò´Ù. bfs, dfs º°·Î ÁÁÀº ¹®Á¦°¡ ÀÖ´Ù´Âµ¥ ¹«½¼ Â÷ÀÌÀÎÁö Àß ¸ð¸£°Ú´Ù ¤Ð
-¸¹ÀÌ Ç®¾îºÁ¾ß °Ú´Ù!
+ë°±ì¤€ 11375 ì—´í˜ˆê°•í˜¸ (https://www.acmicpc.net/problem/11375)
+ì²˜ìŒ ì§œë³´ëŠ” ìµœëŒ€ ìœ ëŸ‰ êµ¬í•˜ëŠ” ì•Œê³ ë¦¬ì¦˜ì´ë‹¤
+ì´ë¶„ ë§¤ì¹­ìœ¼ë¡œë„ í‘¸ëŠ” ë¬¸ì œë¼ê³  í•˜ëŠ”ë° ë‚˜ì¤‘ì— ê·¸ê±¸ë¡œë„ ë‹¤ì‹œ í’€ì–´ì•¼ê² ë‹¤.
+ì²˜ìŒì— bfsë¡œ í’€ì—ˆëŠ”ë° ê³„ì† TLEë¥¼ ë°›ì•˜ë‹¤. bfs, dfs ë³„ë¡œ ì¢‹ì€ ë¬¸ì œê°€ ìžˆë‹¤ëŠ”ë° ë¬´ìŠ¨ ì°¨ì´ì¸ì§€ ìž˜ ëª¨ë¥´ê² ë‹¤ ã… 
+ë§Žì´ í’€ì–´ë´ì•¼ ê² ë‹¤!
 */
 #include <cstdio>
 #include <algorithm>
@@ -12,7 +12,7 @@
 #define MAX 2003
 using namespace std;
 
-// f´Â À¯·® c´Â ¿ë·®
+// fëŠ” ìœ ëŸ‰ cëŠ” ìš©ëŸ‰
 vector<int> vec[MAX];
 int f[MAX][MAX], c[MAX][MAX];
 int visited[MAX], total = 0;
@@ -20,7 +20,7 @@ int n, m, x, w, E = 2002, S = 0;
 bool dfs(int cur) {
 	if (cur == E) return true;
 	for (int &v : vec[cur]) {
-		// ¿ë·®-À¯·®ÀÌ 0º¸´Ù Ä¿¾ß ÇÔ (´õ º¸³¾ ¼ö ÀÖ¾î¾ß ÇÔ)
+		// ìš©ëŸ‰-ìœ ëŸ‰ì´ 0ë³´ë‹¤ ì»¤ì•¼ í•¨ (ë” ë³´ë‚¼ ìˆ˜ ìžˆì–´ì•¼ í•¨)
 		if (c[cur][v] - f[cur][v] <= 0 || visited[v] != -1) continue;
 		visited[v] = cur;
 		if (dfs(v)) return true;
@@ -33,7 +33,7 @@ int main() {
 	scanf("%d %d", &n, &m);
 	for (int i = 1; i <= n; i++) {
 		// source(S)=0, sink(E)=2002
-		// source->Á÷¿ø
+		// source->ì§ì›
 		vec[S].push_back(i);
 		vec[i].push_back(S);
 		c[S][i] = 1;
@@ -41,13 +41,13 @@ int main() {
 		while (x--) {
 			scanf("%d", &w);
 			w += 1000;
-			// Á÷¿ø->ÀÏ
+			// ì§ì›->ì¼
 			c[i][w] = 1;
 			vec[i].push_back(w);
 			vec[w].push_back(i);
 		}
 	}
-	// ÀÏ-> sink
+	// ì¼-> sink
 	for (int i = 1001; i <= 1000 + m; i++) {
 		vec[i].push_back(E);
 		vec[E].push_back(i);
@@ -56,7 +56,7 @@ int main() {
 	fill(visited, visited + MAX, -1);
 	while (dfs(S)) {
 		for (int i = E; i != S; i = visited[i]) {
-			//¿ª¹æÇâÀº °¨¼Ò, 
+			//ì—­ë°©í–¥ì€ ê°ì†Œ, 
 			f[i][visited[i]]--;
 			f[visited[i]][i]++;
 		}
