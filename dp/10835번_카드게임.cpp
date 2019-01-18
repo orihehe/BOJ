@@ -13,15 +13,16 @@ int go(int aa,int bb) {
 		return dp[aa][bb];
 	}
 	int maxV = 0;
-	maxV = max(maxV, go(aa + 1, bb)); // ���� ī�带 ������ ��
-	maxV = max(maxV, go(aa + 1, bb + 1)); // ����, ������ ī�带 ������ �� 
-	if (a[aa] > b[bb]) { // �������� ���ʺ��� ���� ���
-		maxV = max(maxV, go(aa, bb + 1) + b[bb]); // ������ ī�带 ������ ���� ȹ��
+	maxV = max(maxV, go(aa + 1, bb)); // 왼쪽 카드를 버렸을 때
+	maxV = max(maxV, go(aa + 1, bb + 1)); // 왼쪽, 오른쪽 카드를 버렸을 때 
+	if (a[aa] > b[bb]) { // 오른쪽이 왼쪽보다 작을 경우
+		maxV = max(maxV, go(aa, bb + 1) + b[bb]); // 오른쪽 카드를 버리며 점수 획득
 	}
-	// ���� ��� �� �ִ� ����
+	// 위의 경우 중 최댓값 저장
 	return dp[aa][bb] = maxV;
 }
 int main() {
+	scanf("%d", &n);
 	for (int i = 0; i < n; i++) {
 		scanf("%d", &a[i]);
 	}
