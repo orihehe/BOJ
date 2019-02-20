@@ -1,4 +1,6 @@
 ﻿/*
+BOJ 11977 (https://www.acmicpc.net/problem/11977)
+
 모든 i지점에 대해 터뜨려보고 가장 많이 터뜨릴 수 있는 개수를 출력한다.
 */
 #include <cstdio>
