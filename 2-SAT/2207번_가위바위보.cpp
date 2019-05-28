@@ -1,0 +1,51 @@
+﻿/*
+BOJ 2207 - 가위바위보
+https://www.acmicpc.net/problem/2207
+*/
+#include <cstdio>
+#include <algorithm>
+#include <vector>
+#include <stack>
+using namespace std;
+
+/* 🐣🐥 */
+vector<int> vec[20001];
+stack<int> sta;
+bool ans;
+int n, num[20001], cnt, scnt, fn[20001];
+int dfs(int cur) {
+	num[cur] = ++cnt;
+	sta.push(cur);
+
+	int ret = num[cur];
+	for (int v : vec[cur]) {
+		if (!num[v]) ret = min(ret, dfs(v));
+		else if (!fn[v]) ret = min(ret, num[v]);
+	}
+	if (ret == num[cur]) {
+		scnt++;
+		while (true) {
+			int nx = sta.top();
+			sta.pop();
+			fn[nx] = scnt;
+			if (fn[nx] == fn[nx + (nx > n ? -n : n)]) ans = true;
+			if (nx == cur) break;
+		}
+	}
+	return ret;
+}
+int main() {
+	int m, a, b;
+	scanf("%d %d", &m, &n);
+	for (int i = 0; i < m; i++) {
+		scanf("%d %d", &a, &b);
+		if (a < 0) a = -a + n;
+		if (b < 0) b = -b + n;
+		vec[a + (a > n ? -n : n)].push_back(b);
+		vec[b + (b > n ? -n : n)].push_back(a);
+	}
+	for (int i = 1; i <= 2 * n; i++) if (!num[i]) dfs(i);
+	printf("%s", ans ? "OTL" : "^_^");
+
+	return 0;
+}
