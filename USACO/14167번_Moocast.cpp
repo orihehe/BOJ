@@ -10,6 +10,7 @@ https://www.acmicpc.net/problem/14167
 #define pii pair<int,int>
 using namespace std;
 
+/* 🐣🐥 */
 struct edge {
 	int v1, v2, val;
 	bool operator<(const edge &a) const {
